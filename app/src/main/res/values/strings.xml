@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Librarian</string>
+    <string name="title_librarian">Librarian</string>
+    <string name="search">Search</string>
+    <string name="search_for_books">Search for books</string>
+    <string name="info">Info</string>
+    <string name="read">Read</string>
+    <string name="want_to_read">Want to Read</string>
+    <string name="no_title">No Title</string>
+    <string name="unknown_author">Unknown author</string>
+    <string name="failed_to_fetch_books">Failed to fetch books.</string>
+    <string name="unknown_error">Unknown error</string>
+    <string name="this_is_info_screen">This is the info screen.</string>
+    <string name="back">Back</string>
+</resources>
