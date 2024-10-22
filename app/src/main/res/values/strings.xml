@@ -12,4 +12,8 @@
     <string name="unknown_error">Unknown error</string>
     <string name="this_is_info_screen">This is the info screen.</string>
     <string name="back">Back</string>
+    <string name="more_options">More options</string>
+    <string name="unknown_year">Unknown year</string>
+    <string name="published_year">Published: %1$s</string>
+    <string name="add_to_favorites">Add to favorites</string>
 </resources>

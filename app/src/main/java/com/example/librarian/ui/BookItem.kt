@@ -2,17 +2,28 @@ package com.example.librarian.ui
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.librarian.R
 import com.example.librarian.model.Book
-import coil.compose.AsyncImage
 
 @Composable
 fun BookItem(book: Book) {
     val volumeInfo = book.volumeInfo
+
+    val publishedDate = volumeInfo?.publishedDate
+    val year = if (!publishedDate.isNullOrEmpty() && publishedDate.length >= 4) {
+        publishedDate.take(4)
+    } else {
+        stringResource(id = R.string.unknown_year)
+    }
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -22,50 +33,41 @@ fun BookItem(book: Book) {
         ),
         elevation = CardDefaults.cardElevation()
     ) {
-        Row(modifier = Modifier.padding(8.dp)) {
-            if (volumeInfo?.imageLinks?.thumbnail != null) {
-                AsyncImage(
-                    model = volumeInfo.imageLinks.thumbnail,
-                    contentDescription = volumeInfo.title,
-                    modifier = Modifier
-                        .size(100.dp)
-                        .padding(end = 8.dp)
-                )
-            }
-            Column(modifier = Modifier.weight(1f)) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Text(
+                text = volumeInfo?.title ?: stringResource(id = R.string.no_title),
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+            Text(
+                text = volumeInfo?.authors?.joinToString(", ") ?: stringResource(id = R.string.unknown_author),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+            //Spacer(modifier = Modifier.height(4.dp))
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+
                 Text(
-                    text = volumeInfo?.title ?: stringResource(id = R.string.no_title),
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.onSurface
-                )
-                Text(
-                    text = volumeInfo?.authors?.joinToString(", ") ?: stringResource(id = R.string.unknown_author),
-                    style = MaterialTheme.typography.bodyMedium,
+                    text = stringResource(id = R.string.published_year, year),
+                    style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
-                Spacer(modifier = Modifier.height(8.dp))
-                Row {
-                    Button(
-                        onClick = { /* Merkkaa kirja luetuksi */ },
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = MaterialTheme.colorScheme.primary,
-                            contentColor = MaterialTheme.colorScheme.onPrimary
-                        )
-                    ) {
-                        Text(text = stringResource(id = R.string.read))
-                    }
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Button(
-                        onClick = { /* Lisää kirja luettavaksi */ },
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = MaterialTheme.colorScheme.secondary,
-                            contentColor = MaterialTheme.colorScheme.onSecondary
-                        )
-                    ) {
-                        Text(text = stringResource(id = R.string.want_to_read))
-                    }
+                Spacer(modifier = Modifier.weight(1f))
+                IconButton(
+                    onClick = { /* TODO */ }
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Favorite,
+                        contentDescription = stringResource(id = R.string.add_to_favorites),
+                        tint = MaterialTheme.colorScheme.primary
+                    )
                 }
             }
+            //Spacer(modifier = Modifier.height(8.dp))
         }
     }
 }
