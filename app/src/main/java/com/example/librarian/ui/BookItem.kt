@@ -4,7 +4,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.librarian.R
 import com.example.librarian.model.Book
 import coil.compose.AsyncImage
 
@@ -32,35 +34,35 @@ fun BookItem(book: Book) {
             }
             Column(modifier = Modifier.weight(1f)) {
                 Text(
-                    text = volumeInfo?.title ?: "No Title",
+                    text = volumeInfo?.title ?: stringResource(id = R.string.no_title),
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onSurface
                 )
                 Text(
-                    text = volumeInfo?.authors?.joinToString(", ") ?: "Unknown author",
+                    text = volumeInfo?.authors?.joinToString(", ") ?: stringResource(id = R.string.unknown_author),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Row {
                     Button(
-                        onClick = { /* TODO mark book as read */ },
+                        onClick = { /* Merkkaa kirja luetuksi */ },
                         colors = ButtonDefaults.buttonColors(
                             containerColor = MaterialTheme.colorScheme.primary,
                             contentColor = MaterialTheme.colorScheme.onPrimary
                         )
                     ) {
-                        Text(text = "Read")
+                        Text(text = stringResource(id = R.string.read))
                     }
                     Spacer(modifier = Modifier.width(8.dp))
                     Button(
-                        onClick = { /* TODO add book to a list "want to read" */ },
+                        onClick = { /* Lisää kirja luettavaksi */ },
                         colors = ButtonDefaults.buttonColors(
                             containerColor = MaterialTheme.colorScheme.secondary,
                             contentColor = MaterialTheme.colorScheme.onSecondary
                         )
                     ) {
-                        Text(text = "Want to Read")
+                        Text(text = stringResource(id = R.string.want_to_read))
                     }
                 }
             }
